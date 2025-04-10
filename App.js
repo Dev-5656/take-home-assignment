@@ -10,7 +10,7 @@ import {
   ScrollView,
   StatusBar
 } from 'react-native';
-import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Feather, Fontisto, Ionicons, MaterialIcons ,FontAwesome6} from '@expo/vector-icons';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('collections');
@@ -31,10 +31,10 @@ const App = () => {
           
           <View style={styles.profileActions}>
             <TouchableOpacity style={styles.iconButton}>
-              <Feather name="share-2" size={20} color="white" />
+              <Feather name="share-2" size={24} color="white" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.iconButton}>
-              <Feather name="settings" size={20} color="white" />
+              <Fontisto name="player-settings" size={24} color="white"/>
             </TouchableOpacity>
           </View>
         </View>
@@ -43,10 +43,12 @@ const App = () => {
           <View style={styles.usernameContainer}>
             <Text style={styles.username}>@theo_from_hsr</Text>
             <View style={styles.verifiedBadge}>
-              <Feather name="check" size={12} color="white" />
+              <MaterialIcons name="verified" size={24} color="#10b981" />
             </View>
             <TouchableOpacity style={styles.editButton}>
-              <Text style={styles.editButtonText}>EDIT PROFILE</Text>
+              <Text style={styles.editButtonText} >
+                EDIT PROFILE
+              </Text>
               <Feather name="edit-2" size={12} color="gray" />
             </TouchableOpacity>
           </View>
@@ -64,8 +66,10 @@ const App = () => {
           </Text>
           
           <View style={styles.followingContainer}>
-            <Feather name="users" size={14} color="#6b7280" />
-            <Text style={styles.followingText}>2</Text>
+            <View style={styles.followingUserContiner}>
+              <FontAwesome6 name="user-check" size={15} color="#57B9FF" />
+              <Text style={styles.followingText}>2</Text>
+            </View>
             <Text style={styles.followingLabel}>FOLLOWING</Text>
           </View>
         </View>
@@ -100,10 +104,12 @@ const App = () => {
           ]}
           onPress={() => setActiveTab('manageTags')}
         >
-          <Ionicons 
-            name="ios-pricetag-outline" 
-            size={20} 
-            color={activeTab === 'manageTags' ? "#10b981" : "#6b7280"} 
+          <Image 
+            source={require('./assets/images/target.png')}
+            style={[
+              styles.iconImg,
+              { tintColor: activeTab === 'manageTags' ? '#10b981' : '#6b7280' }
+            ]}
           />
           <Text style={[
             styles.tabText, 
@@ -252,36 +258,31 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   profileImageContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 10,
-    borderWidth: 2,
+    width: 100,
+    height: 100,
+    borderRadius: 5,
+    borderRightWidth:3,
+    borderBottomWidth:3,
     borderColor: '#ffd700',
     overflow: 'hidden',
-    // Shadow properties for iOS
-    shadowColor: '#10b981',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.8,
-    shadowRadius: 8,
-    // Shadow properties for Android
-    elevation: 10,
-    // This ensures the shadow is visible
-    backgroundColor: 'transparent',
-    // Add a small margin so shadow is visible
-    margin: 5,
+    margin:10,
   },
   
-  // You might also need to adjust the profile image to ensure it fills the container
+  
   profileImage: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#1e1e1e', // Add background color to prevent transparency issues
+    backgroundColor: '#1e1e1e',
+    borderColor: '#ffd700',
+  },
+
+  iconImg:{
+    height:20,
+    width:20,
+    color:"blue"
   },
   
-  // If you're having issues with overflow on Android, consider using this wrapper
+  
   profileImageWrapper: {
     marginTop: 10,
     marginLeft: 10,
@@ -307,13 +308,13 @@ const styles = StyleSheet.create({
   username: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 20,
   },
   verifiedBadge: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: '#10b981',
+    // width: 16,
+    // height: 16,
+    // borderRadius: 8,
+    // backgroundColor: '#10b981',
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 6,
@@ -322,11 +323,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginLeft: 'auto',
+    marginBottom:2,
+    borderBottomWidth: 2,
+    borderBottomColor: 'grey', // Same as the icon color
+    borderStyle: 'dotted',
   },
   editButtonText: {
     color: 'gray',
     fontSize: 12,
     marginRight: 4,
+    letterSpacing:2,
+  },
+  editUnderline: {
+    
   },
   countryContainer: {
     flexDirection: 'row',
@@ -344,24 +353,29 @@ const styles = StyleSheet.create({
   },
   bio: {
     color: '#d1d5db',
-    fontSize: 14,
-    marginTop: 8,
+    fontSize: 16,
+    marginTop: 12,
+    marginBottom:6,
   },
   followingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginTop: 14,
+  },
+  followingUserContiner:{
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
   },
   followingText: {
     color: '#d1d5db',
-    fontSize: 12,
+    fontSize: 15,
     marginLeft: 4,
     fontWeight: 'bold',
   },
   followingLabel: {
     color: '#6b7280',
     fontSize: 12,
-    marginLeft: 4,
   },
   tabContainer: {
     flexDirection: 'row',
